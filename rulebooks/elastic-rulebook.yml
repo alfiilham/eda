@@ -2,18 +2,18 @@
   hosts: localhost
   sources:
     - cloin.eda.elastic:
-        elastic_host: elasticsearch
+        elastic_host: 10.8.230.25
         elastic_port: 9200
-        elastic_username: elastic
-        elastic_password: elastic!
-        elastic_index_pattern: filebeat-*
+        elastic_username: admin
+        elastic_password: P@ssw0rd
+        elastic_index_pattern: flight
         query: |
           term:
-            container.name.keyword: nginx
+            AIRLINE.keyword: WN
         interval: 5
 
-  rules:
-    - name: Debug event
-      condition: event.ecs is defined and event.nginx.log_level == "error"
-      action:
-        debug:
+  #rules:
+   # - name: Debug event
+     # condition: event.ecs is defined and event.nginx.log_level == "error"
+      #action:
+        #debug:
