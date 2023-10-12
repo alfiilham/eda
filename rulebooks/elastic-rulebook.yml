@@ -1,5 +1,8 @@
 - name: Elastic events
-  hosts: localhost
+  hosts: 10.8.230.25
+  vars:
+    ansible_user: root
+    ansible_ssh_pass: P@ssw0rd
   sources:
     - cloin.eda.elastic:
         elastic_host: 10.8.230.25
