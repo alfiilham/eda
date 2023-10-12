@@ -11,9 +11,8 @@
           term:
             AIRLINE.keyword: WN
         interval: 5
-
-  #rules:
-   # - name: Debug event
-     # condition: event.ecs is defined and event.nginx.log_level == "error"
-      #action:
-        #debug:
+  rules:
+    - name: Debug event
+      condition: event.ecs is defined and event.nginx.log_level == "error"
+      action:
+        debug:
