@@ -13,10 +13,6 @@
         interval: 5
   rules:
     - name: Debug event
-      condition:
-        any:
-          - script: |
-              def cpuUsage = Double.parseDouble(ctx.payload.hits.hits[0]._source['cpu.usage'].replaceAll('%', ''));
-              return cpuUsage > 3.0;
+      condition: "{{ ctx.payload.hits.hits[0]._source['cpu.usage'] | regex_replace('%', '') | float > 3 }}"
       action:
         debug:
