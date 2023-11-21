@@ -13,9 +13,6 @@
         interval: 5
   rules:
     - name: Debug event
-      condition:
-        script: |
-          def cpuUsage = Double.parseDouble(doc['_source']['cpu.usage'].value.replaceAll('%', ''));
-          return cpuUsage > 3.0;
+      condition: _source.cpu.usage > 3
       action:
         debug:
