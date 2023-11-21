@@ -14,9 +14,8 @@
   rules:
     - name: Debug event
       condition:
-        any:
-          - script: |
-              def cpuUsage = Double.parseDouble(ctx.payload.hits.hits[0]._source['cpu.usage'].replaceAll('%', ''));
-              return cpuUsage > 3.0;
+        script: |
+          def cpuUsage = Double.parseDouble(ctx.payload.hits.hits[0]._source['system.cpu.usage'].replaceAll('%', ''));
+          return cpuUsage > 50.0;
       action:
         debug:
