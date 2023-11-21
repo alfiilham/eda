@@ -6,13 +6,13 @@
         elastic_port: 9200
         elastic_username: admin
         elastic_password: P@ssw0rd
-        elastic_index_pattern: .ds-logs-system.syslog-default-2023.10.09-000001
+        elastic_index_pattern: alert-for-ansible
         query: |
           term:
-            AIRLINE.keyword: WN
+            host.ip.keyword: 10.8.230.25,fe80::20c:29ff:fe40:55aa
         interval: 5
   rules:
     - name: Debug event
-      condition: event.ecs is defined and event.nginx.log_level == "error"
+      condition: _source.cpu.usage > 3
       action:
         debug:
