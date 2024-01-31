@@ -13,6 +13,6 @@
         interval: 5
   rules:
     - name: Debug event
-      condition: event.cpu.usage >= event.threshold
+      condition: _source.cpu.usage > 3
       action:
         debug:
