@@ -13,10 +13,6 @@
         interval: 5
   rules:
     - name: Debug event
-      condition:
-        any:
-          - script: |
-              def cpuUsage = Double.parseDouble(ctx.payload.hits.hits[0]._source['system.cpu.usage'].replace('%', ''))
-              return cpuUsage > 50.0
+      condition: event.cpu.usage >= event.threshold
       action:
         debug:
