@@ -9,11 +9,13 @@
         elastic_index_pattern: heartbeat-*
         query: |
           term:
-            monitor.id: httpd-monitor
+            monitor.id.keyword: "httpd-monitor"
         interval: 15
   rules:
     - name: Heartbeat monitor check
-      condition: >
-        event.dataset == "http" and monitor.status == "down" and summary.status == "down"
+      condition: and
+        - event.dataset == "http"
+        - monitor.status == "down"
+        - summary.status == "down"
       action:
         debug:
