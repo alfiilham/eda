@@ -6,13 +6,14 @@
         elastic_port: 9200
         elastic_username: admin
         elastic_password: P@ssw0rd
-        elastic_index_pattern: alert-for-ansible
+        elastic_index_pattern: heartbeat-*
         query: |
           term:
-            host.ip.keyword: 10.8.230.25,fe80::20c:29ff:fe40:55aa
-        interval: 5
+            monitor.id: httpd-monitor
+        interval: 15
   rules:
-    - name: Debug event
-      condition: _source.cpu.usage > 3
+    - name: Heartbeat monitor check
+      condition: >
+        event.dataset == "http" and monitor.status == "down" and summary.status == "down"
       action:
         debug:
