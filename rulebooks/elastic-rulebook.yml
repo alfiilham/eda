@@ -13,6 +13,6 @@
         interval: 15
   rules:
     - name: Heartbeat monitor check
-      condition: event.dataset == "http" and monitor.status == "down" and summary.status == "down"
+      condition: event.monitor.status == "down"
       action:
         debug:
