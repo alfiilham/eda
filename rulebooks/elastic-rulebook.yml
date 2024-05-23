@@ -10,9 +10,9 @@
         query: |
           term:
             monitor.id: "httpd-monitor"
-        interval: 15
+        interval: 5
   rules:
     - name: Heartbeat monitor check
-      condition: monitor.status == "down"
+      condition: state.status == "down"
       action:
         debug:
