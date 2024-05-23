@@ -13,6 +13,6 @@
         interval: 5
   rules:
     - name: Heartbeat monitor check
-      condition: state.status == "down"
+      condition: event.state.status == "down"
       action:
         debug:
