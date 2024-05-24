@@ -8,9 +8,22 @@
         elastic_password: P@ssw0rd
         elastic_index_pattern: heartbeat-*
         query: |
-          term:
-            monitor.id: "httpd-monitor"
-        interval: 30
+          {
+            "bool": {
+              "must": [
+                { "term": { "monitor.id": "httpd-monitor" }},
+                {
+                  "range": {
+                    "@timestamp": {
+                      "gte": "now-5s",
+                      "lt": "now"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        interval: 30  # Check every 1 minute
   rules:
     - name: Heartbeat monitor check
       condition: event.ecs is defined and event.state.status == "down"
