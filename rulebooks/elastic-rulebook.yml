@@ -10,7 +10,7 @@
         query: |
           term:
             monitor.id: "httpd-monitor"
-        interval: 60
+        interval: 5
   rules:
     - name: Heartbeat monitor check
       condition: event.ecs is defined and event.state.status == "down"
